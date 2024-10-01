@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Tracking</title>
+</head>
+<body>
+    <button id="sendButton">Отправить данные</button>
+
+    <script>
+        let mouseMovements = [];
+
+        document.addEventListener('mousemove', function (event) {
+            let time = new Date().getTime();
+            mouseMovements.push({ X: event.clientX, Y: event.clientY, T: time });
+        });
+
+        document.getElementById('sendButton').addEventListener('click', function () {
+            fetch('/Home/SaveMouseData', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(mouseMovements)
+            }).then(response => {
+                if (response.ok) {
+                    alert('Данные успешно отправлены');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
