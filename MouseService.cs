@@ -1,26 +1,29 @@
 ﻿using System;
+using System.Text.Json;
 using Task.Models;
 
 namespace Task
 {
     public class MouseService
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext context;
 
         public MouseService(AppDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
-        public async ValueTask SaveMouseDataAsync(string coordinates)
+        public async ValueTask SaveMouseDataAsync(List<MouseCoordinates> mouseData)
         {
+            var serializedData = JsonSerializer.Serialize(mouseData);
+
             var mouseMovement = new MouseMovement
             {
-                Coordinates = coordinates
+                Coordinates = serializedData
             };
 
-            _context.MouseMovements.Add(mouseMovement);
-            await _context.SaveChangesAsync();
+            await context.MouseMovements.AddAsync(mouseMovement);
+            await context.SaveChangesAsync();
         }
     }
 }
