@@ -1,7 +1,8 @@
 ﻿using System.Text.Json;
+using Task.Data;
 using Task.Models;
 
-namespace Task
+namespace Task.Service
 {
     public class MouseService
     {

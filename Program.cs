@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Task.Data;
+using Task.Service;
 namespace Task
 {
     public class Program
