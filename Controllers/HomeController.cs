@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using Task.Models;
 
 namespace Task.Controllers
@@ -22,7 +21,6 @@ namespace Task.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveMouseData(List<MouseCoordinates> mouseData)
         {
-            
             await this.mouseService.SaveMouseDataAsync(mouseData);
             return Ok();
         }
